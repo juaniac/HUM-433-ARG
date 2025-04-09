@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FIND THE PASSWORD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body {
+      height: auto;
+      min-height: 100%;
+      overflow-y: auto;
+    }
+    
+    body {
+      background-color: #0a0a0a;
+      color: #00ffcc;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columns */
+      gap: 24px;
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+
+    .grid img {
+      width: 100%;
+      height: auto;
+      border: 3px solid #00ffcc;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .grid img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.3s ease;
+    }
+
+    .overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 4px solid #00ffcc;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+
+    .overlay:after {
+      content: "✖";
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #00ffcc;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .password-section {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #000;
+    }
+
+    .password-section input {
+      padding: 0.5rem 1rem;
+      border: 2px solid #00ffcc;
+      background-color: #0a0a0a;
+      color: #00ffcc;
+      font-family: inherit;
+      font-size: 1rem;
+      border-radius: 4px;
+      margin-right: 1rem;
+      width: min(300px, 80%);
+    }
+
+    .password-section button {
+      padding: 0.5rem 1.5rem;
+      background-color: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background-color 0.3s ease;
+    }
+
+    .password-section button:hover {
+      background-color: #00ccaa;
+    }
+
+    @media (max-width: 600px) {
+      /* h1 {
+        font-size: 3.5rem;
+      } */
+
+      .password-section input {
+        margin-bottom: 1rem;
+        width: 90%;
+      }
+
+      .password-section button {
+        width: 80%;
+      }
+
+      .grid {
+        padding: 1rem;
+      }
+    }
+
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+      }
+      20%, 24%, 55% {
+        opacity: 0.4;
+        text-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <p style="font-size: clamp(2rem, 8vw, 3rem); text-shadow: 0 0 20px #00ffcc; text-align: center; letter-spacing: 3px; font-weight: bold; animation: flicker 2s infinite;">
+    FIND THE PASSWORD
+  </p>
+
+  <p style= "text-shadow: 0 0 20px #00ffcc; text-align: center; letter-spacing: 3px;">Some things are not as they appear, collect them to find the password.</p>
+
+  <div class="grid">
+    <!-- 16 Building Images -->
+    <!-- Update path if needed -->
+    <img src="ARG_photos/01.jpg" alt="Building 01" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/02.jpg" alt="Building 02" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/03.jpg" alt="Building 03" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/04.jpg" alt="Building 04" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/05.jpg" alt="Building 05" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/06.jpg" alt="Building 06" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/07.jpg" alt="Building 07" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/08.jpg" alt="Building 08" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/09.jpg" alt="Building 09" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/10.jpg" alt="Building 10" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/11.jpg" alt="Building 11" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/12.jpg" alt="Building 12" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/13.jpg" alt="Building 13" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/14.jpg" alt="Building 14" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/15.jpg" alt="Building 15" onclick="showOverlay(this.src)">
+    <img src="ARG_photos/16.jpg" alt="Building 16" onclick="showOverlay(this.src)">
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="imgOverlay" onclick="hideOverlay()">
+    <img id="overlayImg" src="" alt="Preview">
+  </div>
+
+  <!-- Password Entry Section -->
+  <div class="password-section">
+    <input type="text" id="password-input" placeholder="Enter password..." />
+    <button onclick="checkPassword()">Submit</button>
+  </div>
+
+  <script>
+    function showOverlay(src) {
+      document.getElementById("overlayImg").src = src;
+      document.getElementById("imgOverlay").classList.add("active");
+    }
+
+    function hideOverlay() {
+      document.getElementById("imgOverlay").classList.remove("active");
+    }
+
+    function checkPassword() {
+      const correctPassword = "EA429+i2S2X72OAF".toLowerCase();
+      const input = document.getElementById("password-input").value.trim().toLowerCase();
+
+      if (input === correctPassword) {
+        window.location.href = "congrats.html";
+      } else {
+        alert("Incorrect password. Try again.");
+      }
+    }
+  </script>
+
+</body>
+</html>

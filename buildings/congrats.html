@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Congratulations</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #00ffcc;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 5rem;
+      text-shadow: 0 0 20px #00ffcc;
+      animation: flicker 2s infinite;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      max-width: 800px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .poster-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 2rem;
+    }
+
+    .poster-grid img {
+      height: 400px;
+      width: auto;
+      border: 3px solid #00ffcc;
+      border-radius: 4px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      cursor: pointer;
+    }
+
+    .poster-grid img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 0.3s ease;
+    }
+
+    .overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .overlay img {
+      max-height: 90%;
+      max-width: 90%;
+      border: 4px solid #00ffcc;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+
+    .overlay::after {
+      content: "✖";
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #00ffcc;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+      }
+      20%, 24%, 55% {
+        opacity: 0.4;
+        text-shadow: none;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .poster-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .poster-grid img {
+        height: 300px;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Congratulations!</h1>
+
+  <p>You have unlocked the next step in the ARG.</p>
+
+  <p>
+    EPFL has been doing shady things and has silenced people who tried to address them, like Prof. A.
+    Previously, we tried to share posters and ask for help, but the university silenced us.
+    It didn’t work out, which is why you needed to prove yourself first.
+  </p>
+
+  <p>Look at the posters. Send me an email...</p>
+
+  <div class="poster-grid">
+    <img src="posters/1.jpg" alt="Poster 1" onclick="showOverlay(this.src)">
+    <img src="posters/2.jpg" alt="Poster 2" onclick="showOverlay(this.src)">
+    <img src="posters/3.jpg" alt="Poster 3" onclick="showOverlay(this.src)">
+    <img src="posters/4.jpg" alt="Poster 4" onclick="showOverlay(this.src)">
+  </div>
+
+  <div class="overlay" id="imgOverlay" onclick="hideOverlay()">
+    <img id="overlayImg" src="" alt="Poster Preview">
+  </div>
+
+  <script>
+    function showOverlay(src) {
+      document.getElementById("overlayImg").src = src;
+      document.getElementById("imgOverlay").classList.add("active");
+    }
+
+    function hideOverlay() {
+      document.getElementById("imgOverlay").classList.remove("active");
+    }
+  </script>
+</body>
+</html>
+
