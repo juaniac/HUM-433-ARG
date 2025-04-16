@@ -161,21 +161,21 @@
     <!-- 16 Building Images -->
     <!-- Update path if needed -->
     <img src="ARG_photos/01.jpg" alt="Building 01" onclick="showOverlay(this.src)">
-    <img src="ARG_photos/02.jpg" alt="Building 02" onclick="showOverlay(this.src)">
+    <!-- <img src="ARG_photos/02.jpg" alt="Building 02" onclick="showOverlay(this.src)"> -->
     <img src="ARG_photos/03.jpg" alt="Building 03" onclick="showOverlay(this.src)">
-    <img src="ARG_photos/04.jpg" alt="Building 04" onclick="showOverlay(this.src)">
+    <!-- <img src="ARG_photos/04.jpg" alt="Building 04" onclick="showOverlay(this.src)"> -->
     <img src="ARG_photos/05.jpg" alt="Building 05" onclick="showOverlay(this.src)">
     <img src="ARG_photos/06.jpg" alt="Building 06" onclick="showOverlay(this.src)">
     <img src="ARG_photos/07.jpg" alt="Building 07" onclick="showOverlay(this.src)">
     <img src="ARG_photos/08.jpg" alt="Building 08" onclick="showOverlay(this.src)">
-    <img src="ARG_photos/09.jpg" alt="Building 09" onclick="showOverlay(this.src)">
-    <img src="ARG_photos/10.jpg" alt="Building 10" onclick="showOverlay(this.src)">
-    <img src="ARG_photos/11.jpg" alt="Building 11" onclick="showOverlay(this.src)">
+    <!-- <img src="ARG_photos/09.jpg" alt="Building 09" onclick="showOverlay(this.src)"> -->
+    <!-- <img src="ARG_photos/10.jpg" alt="Building 10" onclick="showOverlay(this.src)"> -->
+    <!-- <img src="ARG_photos/11.jpg" alt="Building 11" onclick="showOverlay(this.src)"> -->
     <img src="ARG_photos/12.jpg" alt="Building 12" onclick="showOverlay(this.src)">
     <img src="ARG_photos/13.jpg" alt="Building 13" onclick="showOverlay(this.src)">
-    <img src="ARG_photos/14.jpg" alt="Building 14" onclick="showOverlay(this.src)">
-    <img src="ARG_photos/15.jpg" alt="Building 15" onclick="showOverlay(this.src)">
-    <img src="ARG_photos/16.jpg" alt="Building 16" onclick="showOverlay(this.src)">
+    <!-- <img src="ARG_photos/14.jpg" alt="Building 14" onclick="showOverlay(this.src)"> -->
+    <!-- <img src="ARG_photos/15.jpg" alt="Building 15" onclick="showOverlay(this.src)"> -->
+    <!-- <img src="ARG_photos/16.jpg" alt="Building 16" onclick="showOverlay(this.src)"> -->
   </div>
 
   <!-- Overlay -->
@@ -200,10 +200,11 @@
     }
 
     function checkPassword() {
-      const correctPassword = "EA429+i2S2X72OAF".toLowerCase();
+      const correctPasswordLong  = "EA429+i2S2X72OAF".toLowerCase();
+      const correctPasswordShort = "E49+i272".toLowerCase();
       const input = document.getElementById("password-input").value.trim().toLowerCase();
 
-      if (input === correctPassword) {
+      if (input === correctPasswordLong || input === correctPasswordShort) {
         window.location.href = "congrats.html";
       } else {
         alert("Incorrect password. Try again.");
