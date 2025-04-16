@@ -1,76 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login</title>
-	<script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- This is part of an alternate reality game. This is not a real login page. -->
 </head>
 <body class="bg-gradient-to-br from-blue-500 to-purple-600 h-screen flex items-center justify-center">
 
-	<!-- Login Card -->
-	<div class="bg-white p-8 rounded-2xl shadow-2xl w-96 text-center animate-fadeIn">
-		<h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome to GoMail</h1>
-		<p class="text-gray-500 mb-6">Sign in to access your inbox</p>
+  <!-- Access Card -->
+  <div class="bg-white p-8 rounded-2xl shadow-2xl w-96 text-center animate-fadeIn">
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">Welcome to GoMail</h1>
+    <p class="text-gray-500 mb-6">Enter credentials to proceed</p>
 
-		<!-- Login Form -->
-		<form id="login-form">
-			<div class="mb-4 text-left">
-				<label class="block text-gray-600 text-sm font-semibold mb-1">Email</label>
-				<input type="email" id="email" placeholder="you@gomail.com" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400" required>
-			</div>
-			<div class="mb-4 text-left">
-				<label class="block text-gray-600 text-sm font-semibold mb-1">Password</label>
-				<input type="password" id="password" placeholder="••••••••" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400" required>
-			</div>
+    <!-- Access Form -->
+    <form id="login-form">
+      <div class="mb-4 text-left">
+        <label class="block text-gray-600 text-sm font-semibold mb-1">User GoMail</label>
+        <input type="text" id="email" placeholder="you@gomail.com" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400" required>
+      </div>
+      <div class="mb-4 text-left">
+        <label class="block text-gray-600 text-sm font-semibold mb-1">Access Key</label>
+        <input type="text" id="password" placeholder="Enter access code" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400" required>
+      </div>
 
-			<p id="error-message" class="text-red-500 text-sm hidden">Invalid email or password. Please try again.</p>
+      <p id="error-message" class="text-red-500 text-sm hidden">Access denied. Check your credentials.</p>
 
-			<button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition mt-4">Login</button>
-		</form>
+      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition mt-4">Proceed</button>
+    </form>
 
-		<p class="mt-4 text-sm text-gray-500">
-			<a href="#" id="forgot-password-link" class="text-blue-500 hover:underline">Forgot password?</a>
-		</p>
-		
-		<p id="forgot-error" class="text-red-500 text-sm mt-2 hidden">Please enter a valid email before resetting password.</p>
-	</div>
+    <p class="mt-4 text-sm text-gray-500">
+      <a href="#" id="forgot-password-link" class="text-blue-500 hover:underline">Reset Your Access Key</a>
+    </p>
 
-	<script>
-		document.getElementById("login-form").addEventListener("submit", function(event) {
-			event.preventDefault();
-			const email = document.getElementById("email").value;
-			const password = document.getElementById("password").value;
-			const errorMessage = document.getElementById("error-message");
+    <p id="forgot-error" class="text-red-500 text-sm mt-2 hidden">Please enter a valid identifier before continuing.</p>
+  </div>
 
-			errorMessage.classList.remove("hidden"); // Show error message
-		});
+  <script>
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const errorMessage = document.getElementById("error-message");
 
-		document.getElementById("forgot-password-link").addEventListener("click", function(event) {
-		event.preventDefault();
-		const email = document.getElementById("email").value.trim();
-		const forgotError = document.getElementById("forgot-error");
+      errorMessage.classList.remove("hidden");
+    });
 
-		const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    document.getElementById("forgot-password-link").addEventListener("click", function(event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const forgotError = document.getElementById("forgot-error");
 
-		if (email === "adrian.andrews@gomail.com") {
-			forgotError.classList.add("hidden");
-			window.location.href = "forgot_password.html";
-		} else {
-			forgotError.classList.remove("hidden");
-		}
-	});
-	</script>
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-	<style>
-		@keyframes fadeIn {
-			from { opacity: 0; transform: translateY(-10px); }
-			to { opacity: 1; transform: translateY(0); }
-		}
-		.animate-fadeIn {
-			animation: fadeIn 0.6s ease-out;
-		}
-	</style>
+      if (email === "adrian.andrews@gomail.com") {
+        forgotError.classList.add("hidden");
+        window.location.href = "forgot_key.html";
+      } else {
+        forgotError.classList.remove("hidden");
+      }
+    });
+  </script>
+
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.6s ease-out;
+    }
+  </style>
 
 </body>
 </html>
