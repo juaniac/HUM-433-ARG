@@ -4,27 +4,27 @@
 	<meta name="robots" content="noindex, nofollow">
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Reset Key</title>
+	<title>Reset Password</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-br from-blue-500 to-purple-600 h-screen flex items-center justify-center">
 
 	<!-- Reset Key Card -->
 	<div class="bg-white p-8 rounded-2xl shadow-2xl w-96 text-center animate-fadeIn">
-		<h1 class="text-2xl font-bold text-gray-800 mb-2">Reset Your Key</h1>
+		<h1 class="text-2xl font-bold text-gray-800 mb-2">Reset Your Password</h1>
 		<p class="text-gray-500 mb-6 text-sm">Account: <span class="font-semibold text-blue-600">adrian.andrews@gomail.com</span></p>
 
 		<form id="reset-form">
 			<div class="mb-4 text-left">
 				<label class="block text-gray-600 text-sm font-semibold mb-1">New Password</label>
-				<input type="password" id="new-key" placeholder="New key" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400" required />
+				<input type="password" id="new-key" placeholder="New Password" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400" required />
 			</div>
 			<div class="mb-4 text-left">
 				<label class="block text-gray-600 text-sm font-semibold mb-1">Confirm Password</label>
-				<input type="password" id="confirm-key" placeholder="Confirm key" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400" required />
+				<input type="password" id="confirm-key" placeholder="Confirm Password" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400" required />
 			</div>
 
-			<p id="password-error" class="text-red-500 text-sm hidden mb-2">Keys do not match. Please try again.</p>
+			<p id="key-error" class="text-red-500 text-sm hidden mb-2">Passwords do not match. Please try again.</p>
 
 			<button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition mt-2">Reset Password</button>
 		</form>
