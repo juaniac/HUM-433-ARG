@@ -25,10 +25,16 @@
 
 		<!-- Email Preview -->
 		<section class="flex-1 bg-white overflow-y-auto p-6">
+			<div id="replied-email" class="mb-4 hidden"></div>
 			<h3 class="text-xl font-bold mb-1" id="email-subject">Select an email</h3>
 			<p class="text-gray-500 mb-4" id="email-from"></p>
 			<hr class="my-4">
 			<p class="text-gray-700 leading-6" id="email-body">Click on an email to view its content.</p>
+			<div id="attachments-section" class="mt-6 hidden">
+				<hr class="my-4">
+				<h5 class="text-lg font-semibold mb-2">Attachments:</h5>
+				<div id="attachments-container" class="flex gap-4 overflow-x-auto"></div>
+			</div>
 		</section>
 	</main>
 
@@ -40,7 +46,13 @@
 					email: "nerio.plandusk@gomail.com",
 					subject: "Re: Elvianne Again",
 					body: `Ugh. Elvianne again.\n\nHe always turns this into a big **ethics debate**.\n\nThe system works and looks good on paper. Maybe give him a spot on some internal committee to keep him busy.\n\n— **Nerio**`,
-					time: "Yesterday"
+					time: "Yesterday",
+					attachments: [
+						"./paper_screenshots/1.png", 
+						"./paper_screenshots/2.png",
+						"./paper_screenshots/3.png"
+					],
+					replyTo: "To Nerio: Elvianne’s Audit Worries"
 				},
 				{
 					sender: "Adrian Andrews",
@@ -54,21 +66,24 @@
 					email: "adrian.andrews@gomail.com",
 					subject: "Private Response",
 					body: `Elvianne,\n\nThese concerns have been noted. I would recommend **keeping these conversations internal for now**—no need to jeopardize public perception.\n\nI’ll speak with Nerio about your audit notes.\n\n— **Adrian**`,
-					time: "1 week ago"
+					time: "1 week ago",
+					replyTo: "Follow-up on Representation Bias"
 				},
 				{
 					sender: "Elvianne Quoril",
 					email: "@elvianne.quoril@gomail.com",
 					subject: "Follow-up on Representation Bias",
 					body: `Adrian,\n\nThis isn’t just about diversity on paper. **60% of our master cohort is still Swiss**, and most of the rest come from EU countries.\n\nThe model’s training data reflects **past human bias**, not objective reality.\n\nWe need to pause the system and focus on inequality first.\n\n— **Elvianne**`,
-					time: "1 week ago"
+					time: "1 week ago",
+					replyTo: "Re: ACM Paper on Bias"
 				},
 				{
 					sender: "Adrian Andrews",
 					email: "adrian.andrews@gomail.com",
-					subject: "RE: ACM Paper on Bias",
+					subject: "Re: ACM Paper on Bias",
 					body: `Elvianne,\n\nI read parts of it, but I think you're overstating the case. Our applicant pool is already **international**.\n\nLet’s not undermine a model that is doing what it was designed to do.\n\n— **Adrian**`,
-					time: "2 weeks ago"
+					time: "2 weeks ago",
+					replyTo: "ACM Paper on Bias in ML"
 				},
 				{
 					sender: "Elvianne",
@@ -116,11 +131,55 @@
 
 		function loadEmailDetail(category, index) {
 			const email = emails[category][index];
+
 			emailSubjectEl.textContent = email.subject;
 			emailFromEl.textContent = `From: ${email.sender} (${email.email})`;
 			emailBodyEl.innerHTML = email.body
 				.replace(/\n/g, "<br>")
 				.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+			// Clear replied-email section
+			const repliedContainer = document.getElementById("replied-email");
+			repliedContainer.innerHTML = "";
+			repliedContainer.classList.add("hidden");
+
+			// Show the original email if this is a replied email
+			if (email.replyTo !== undefined) {
+				const repliedIndex = emails[category].findIndex(e => e.subject === email.replyTo);
+				if (repliedIndex !== -1) {
+					repliedContainer.classList.remove("hidden");
+					const repliedEmail = emails[category][repliedIndex];
+
+					const div = document.createElement("div");
+					div.className = "bg-gray-100 p-4 mb-4 rounded-md border cursor-pointer hover:bg-gray-200 transition";
+					div.innerHTML = `
+						<p class="text-sm text-gray-500 mb-1">Replying to:</p>
+						<h4 class="text-md font-semibold mb-1">${repliedEmail.subject}</h4>
+						<p class="text-sm text-gray-600 truncate">${repliedEmail.body.split("\n")[0]}</p>
+					`;
+
+					div.addEventListener("click", () => loadEmailDetail(category, repliedIndex));
+					repliedContainer.appendChild(div);
+				}
+			}
+			
+			// Show attached images  
+			const section = document.getElementById("attachments-section");
+			const container = document.getElementById("attachments-container");			
+			container.innerHTML = "";
+			
+			if (email.attachments && email.attachments.length > 0) {
+				section.classList.remove("hidden");				
+				email.attachments.forEach(url => {
+					const img = document.createElement("img");
+					img.src = url;
+					img.alt = "Attachment";
+					img.className = "h-32 rounded-lg shadow-md object-cover";					
+					container.appendChild(img);
+				});
+			} else {
+				section.classList.add("hidden");
+			}
 		}
 
 		searchBar.addEventListener("input", () => {
