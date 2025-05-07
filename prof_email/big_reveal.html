@@ -33,7 +33,7 @@
 			<div id="attachments-section" class="mt-6 hidden">
 				<hr class="my-4">
 				<h5 class="text-lg font-semibold mb-2">Attachments:</h5>
-				<div id="attachments-container" class="flex gap-4 overflow-x-auto"></div>
+				<div id="attachments-container" class="flex flex-col space-y-4 overflow-y-auto max-h-96 pr-2"></div>
 			</div>
 		</section>
 	</main>
@@ -89,6 +89,8 @@
 					attachments: [
 						"./paper_screenshots/1.png", 
 						"./paper_screenshots/2.png",
+						"./paper_screenshots/3.png",
+						"./paper_screenshots/4.png",
 						"./paper_screenshots/3.png"
 					],
 				}
@@ -174,7 +176,7 @@
 					const img = document.createElement("img");
 					img.src = url;
 					img.alt = "Attachment";
-					img.className = "h-32 rounded-lg shadow-md object-cover";					
+					img.className = "w-full h-auto object-cover rounded-lg shadow-md";					
 					container.appendChild(img);
 				});
 			} else {
